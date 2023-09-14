@@ -11,11 +11,7 @@ def segment_with_z_cylinder_surface(cell, number_of_segments):
 
     length_of_segment = max_x/number_of_segments
     radiuses = np.linspace(length_of_segment/2, max_x, number_of_segments, endpoint=False)
-    print(radiuses)
-
-    max_x/number_of_segments
-
-
+    print('segmentation', radiuses)
 
     surfaces = []
     for radius in radiuses:
@@ -23,21 +19,19 @@ def segment_with_z_cylinder_surface(cell, number_of_segments):
 
     new_regions = []
     for i, surface in enumerate(surfaces):
-        print(surface.id)
         if i == 0:
-            print('first surface')
+            print('first segmenting surface')
             new_region = cell.region & -surface
-            # new_regions.append(new_region)
         else:
             new_region = cell.region & +surfaces[i-1] & -surfaces[i]
         new_regions.append(new_region)
-        print(i, cell.region, new_region)
+        print(i, new_region)
 
         if i == len(surfaces)-1:
-            print('last surface')
+            print('last segmenting surface')
             new_region = cell.region & +surface
             new_regions.append(new_region)
-            print(i, cell.region, new_region)
+            print(i, new_region)
 
 
     cells = []
@@ -66,3 +60,5 @@ geometry = openmc.Geometry(cells)
 
 plot = geometry.plot(basis='xz',outline=True)
 plot.figure.savefig('seg.png')
+plot = geometry.plot(basis='xy',outline=True)
+plot.figure.savefig('seg_xy.png')
