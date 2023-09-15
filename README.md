@@ -4,6 +4,13 @@
 
 Specify the type of segmentation pane desired (XPlane, YPlane, ZPlane or ZCylinder) and the number of segments and obtain segmented cells.
 
+# Install
+
+You will need to have OpenMC installed then you can use pip to install this package.
+
+```bash
+pip install openmc-cell-segmenter
+```
 # Example scripts
 
 Example Python scripts can be found in the [examples folder](https://github.com/fusion-energy/openmc_cell_segmenter/tree/main/example).
