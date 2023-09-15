@@ -1,0 +1,47 @@
+# This CI will launch a Docker image that contains all the dependencies required
+# within that image the pytest test suite is run 
+
+name: CI with install
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - '.gitignore'
+      - '*.md'
+      - 'CITATION.cff'
+      - 'LICENSE.txt'
+      - 'readthedocs.yml'
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container:
+      image: openmc/openmc:develop
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: install package
+        run: |
+          pip install --upgrade pip
+          pip install .
+          python -c "import openmc_cell_segmenter"
+
+      - name: install packages for tests
+        run: |
+          pip install .[tests]
+
+      - name: Run test_utils
+        run: |
+          pytest tests
+
+      - name: Run examples
+        run: |
+          cd examples
+          python segment_rectange_with_zplane_xplane_yp.py
+          python segment_spheres_with_zplane_and_zcylin.py
+          python segment_text.py
