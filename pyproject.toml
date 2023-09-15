@@ -1,0 +1,45 @@
+[build-system]
+requires = [
+    "setuptools>=65.5.0",
+    "setuptools_scm[toml]>=7.0.5"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openmc_cell_segmenter"
+dynamic = ["version"]
+description = "todo"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+authors = [
+  { name="The Openmc Cell Segmenter Development Team" },
+]
+license = {file = "LICENSE.txt"}
+requires-python = ">=3.8"
+keywords = ["python", "geometry", "openmc"]
+dependencies = [
+    "numpy>=1.21.1",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/fusion-energy/openmc_cell_segmenter"
+"Bug Tracker" = "https://github.com/fusion-energy/openmc_cell_segmenter/issues"
+"Documentation" = "https://openmc_cell_segmenter.readthedocs.io"
+
+[tool.setuptools_scm]
+write_to = "src/_version.py"
+
+[project.optional-dependencies]
+tests = [
+    "pytest>=5.4.3",
+]
+
+[tool.black]
+line-length = 120
+
+[tool.setuptools]
+package-dir = {"" = "src"}

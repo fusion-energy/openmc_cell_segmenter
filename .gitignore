@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 
 *.png
+src/_version.py
