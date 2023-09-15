@@ -63,7 +63,7 @@ def get_surfaces_for_segmentation(cell, number_of_segments, surface_type):
     x_width_of_segment = abs(min_x-max_x)/number_of_segments
     y_width_of_segment = abs(min_y-max_y)/number_of_segments
     z_width_of_segment = abs(min_z-max_z)/number_of_segments
-    print('z_width_of_segment',z_width_of_segment)
+    # print('z_width_of_segment',z_width_of_segment)
 
     if surface_type == 'zcylinder':
         
@@ -80,6 +80,10 @@ def get_surfaces_for_segmentation(cell, number_of_segments, surface_type):
         # print('segmentation', radiuses)
     elif surface_type == 'zplane':
         radiuses = np.linspace(min_z+z_width_of_segment, max_z, number_of_segments, endpoint=False)
+    elif surface_type == 'xplane':
+        radiuses = np.linspace(min_x+x_width_of_segment, max_x, number_of_segments, endpoint=False)
+    elif surface_type == 'yplane':
+        radiuses = np.linspace(min_y+y_width_of_segment, max_y, number_of_segments, endpoint=False)
 
     print('radiuses',radiuses)
     surfaces = []
@@ -88,6 +92,10 @@ def get_surfaces_for_segmentation(cell, number_of_segments, surface_type):
             surfaces.append(openmc.ZCylinder(r=radius))
         if surface_type == 'zplane':
             surfaces.append(openmc.ZPlane(z0=radius))
+        if surface_type == 'xplane':
+            surfaces.append(openmc.XPlane(x0=radius))
+        if surface_type == 'yplane':
+            surfaces.append(openmc.YPlane(y0=radius))
     
     return surfaces
 
