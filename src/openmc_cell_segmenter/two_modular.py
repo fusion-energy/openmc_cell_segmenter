@@ -17,25 +17,25 @@ def segment_cell_with_surfaces(cell, number_of_segments, surface_types=['zcylind
         cell,
         surfaces
     )
-    return first_segment_of_cells
+    # return first_segment_of_cells
 
-    # print('segmenting with', surface_types[1])
+    print('segmenting with', surface_types[1])
 
-    # surfaces = get_surfaces_for_segmentation(
-    #     cell,
-    #     number_of_segments[1],
-    #     surface_type=surface_types[1]
-    # )
+    surfaces = get_surfaces_for_segmentation(
+        cell,
+        number_of_segments[1],
+        surface_type=surface_types[1]
+    )
 
-    # all_new_cells = []
-    # for once_segmented_cell in first_segment_of_cells:
-    #     new_cells = segment_cell_with_surface(
-    #         once_segmented_cell, surfaces
-    #     )
-    #     all_new_cells = all_new_cells + new_cells
+    all_new_cells = []
+    for once_segmented_cell in first_segment_of_cells:
+        new_cells = segment_cell_with_surface(
+            once_segmented_cell, surfaces
+        )
+        all_new_cells = all_new_cells + new_cells
 
 
-    # return all_new_cells
+    return all_new_cells
 
 def get_surfaces_for_segmentation(cell, number_of_segments, surface_type):
 
@@ -146,8 +146,8 @@ blanket_region = -inner_sphere_surface | -inner_sphere_surface2
 # example cell
 cell = openmc.Cell(region=blanket_region)
 
-# cells = segment_cell_with_surfaces(cell, [10,10], ['zcylinder', 'zplane'])
-cells = segment_cell_with_surfaces(cell, [10], ['zcylinder'])
+cells = segment_cell_with_surfaces(cell, [10,10], ['zcylinder', 'zplane'])
+# cells = segment_cell_with_surfaces(cell, [10], ['zcylinder'])
 
 geometry = openmc.Geometry(cells)  
 
