@@ -42,6 +42,6 @@ jobs:
       - name: Run examples
         run: |
           cd examples
-          python segment_rectange_with_zplane_xplane_yp.py
-          python segment_spheres_with_zplane_and_zcylin.py
+          python segment_rectange_with_zplane_xplane_yplane.py
+          python segment_spheres_with_zplane_and_zcylinder.py
           python segment_text.py
