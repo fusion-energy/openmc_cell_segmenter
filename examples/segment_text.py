@@ -1,4 +1,3 @@
-
 # This example was just used for the readme image.
 # It would need vacuum surfaces and voids for transport.
 
@@ -22,9 +21,13 @@ surf_z_back = openmc.ZPlane(z0=-1)
 surf_z_front = openmc.ZPlane(z0=1)
 
 lower_region = +surf_s_left & -surf_s_right & +surf_s_bottom & -surf_s_upper_bottom & +surf_z_back & -surf_z_front
-lower_upper_region = +surf_s_mid_right & -surf_s_right & +surf_s_upper_bottom & -surf_s_lower_midy & +surf_z_back & -surf_z_front
+lower_upper_region = (
+    +surf_s_mid_right & -surf_s_right & +surf_s_upper_bottom & -surf_s_lower_midy & +surf_z_back & -surf_z_front
+)
 mid_region = +surf_s_left & -surf_s_right & +surf_s_lower_midy & -surf_s_upper_midy & +surf_z_back & -surf_z_front
-upper_lower_region = -surf_s_mid_left & +surf_s_left & +surf_s_upper_midy & -surf_s_lower_top & +surf_z_back & -surf_z_front
+upper_lower_region = (
+    -surf_s_mid_left & +surf_s_left & +surf_s_upper_midy & -surf_s_lower_top & +surf_z_back & -surf_z_front
+)
 upper_region = +surf_s_left & -surf_s_right & +surf_s_lower_top & -surf_s_top & +surf_z_back & -surf_z_front
 
 all_regions = lower_region | mid_region
@@ -36,33 +39,33 @@ cell = openmc.Cell(region=all_regions)
 
 geometry = openmc.Geometry([cell])
 
-plot = geometry.plot(basis='xy',outline=True)
-plot.figure.savefig('letter_s_csg_xy.png',  bbox_inches="tight")
+plot = geometry.plot(basis="xy", outline=True)
+plot.figure.savefig("letter_s_csg_xy.png", bbox_inches="tight")
 
-segmented_cells = segment(cell, [10,10, 10], ['zplane', 'xplane', 'yplane'])
-
-geometry = openmc.Geometry(segmented_cells)
-
-plot = geometry.plot(basis='xy',outline=True)
-plot.figure.savefig('letter_s_csg_xyz_xy.png',  bbox_inches="tight")
-
-segmented_cells = segment(cell, [10], ['yplane'])
+segmented_cells = segment(cell, [10, 10, 10], ["zplane", "xplane", "yplane"])
 
 geometry = openmc.Geometry(segmented_cells)
 
-plot = geometry.plot(basis='xy',outline=True)
-plot.figure.savefig('letter_s_csg_y_xy.png',  bbox_inches="tight")
+plot = geometry.plot(basis="xy", outline=True)
+plot.figure.savefig("letter_s_csg_xyz_xy.png", bbox_inches="tight")
 
-segmented_cells = segment(cell, [10], ['xplane'])
-
-geometry = openmc.Geometry(segmented_cells)
-
-plot = geometry.plot(basis='xy',outline=True)
-plot.figure.savefig('letter_s_csg_x_xy.png',  bbox_inches="tight")
-
-segmented_cells = segment(cell, [10], ['zcylinder'])
+segmented_cells = segment(cell, [10], ["yplane"])
 
 geometry = openmc.Geometry(segmented_cells)
 
-plot = geometry.plot(basis='xy',outline=True)
-plot.figure.savefig('letter_s_csg_zcy_xy.png',  bbox_inches="tight")
+plot = geometry.plot(basis="xy", outline=True)
+plot.figure.savefig("letter_s_csg_y_xy.png", bbox_inches="tight")
+
+segmented_cells = segment(cell, [10], ["xplane"])
+
+geometry = openmc.Geometry(segmented_cells)
+
+plot = geometry.plot(basis="xy", outline=True)
+plot.figure.savefig("letter_s_csg_x_xy.png", bbox_inches="tight")
+
+segmented_cells = segment(cell, [10], ["zcylinder"])
+
+geometry = openmc.Geometry(segmented_cells)
+
+plot = geometry.plot(basis="xy", outline=True)
+plot.figure.savefig("letter_s_csg_zcy_xy.png", bbox_inches="tight")
